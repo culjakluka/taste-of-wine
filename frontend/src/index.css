@@ -1,0 +1,239 @@
+/* Taste of Wine: global styles, copied from the design system (tokens + component classes) */
+@import url("https://fonts.googleapis.com/css2?family=Gloock&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap");
+
+/* ---------- design tokens ---------- */
+:root, [data-theme="paper"] {
+  --paper: #f4f5f1;
+  --paper-raised: #fbfbf9;
+  --rule: #cfd3cb;
+  --leader: #a3aba5;
+  --field-border: #7d8a82;
+  --ink: #1d2d26;
+  --ink-secondary: #56645c;
+  --on-ink: #f4f5f1;
+  --gilt: #a6843a;
+  --gilt-deep: #7a5e1f;
+  --garnet: #7a2232;
+  --garnet-soft: #f3e3e4;
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-pill: 999px;
+  --measure: 40rem;
+  --page-max: 60rem;
+  --control-height: 40px;
+  --font-display: Gloock, "Bodoni 72", Didot, Georgia, serif;
+  --font-text: "Source Serif 4", "Source Serif Pro", Georgia, serif;
+}
+.display-xl { font-family: var(--font-display); font-size: 48px; line-height: 52px; font-weight: 400; letter-spacing: -0.01em; }
+.display-l { font-family: var(--font-display); font-size: 36px; line-height: 42px; font-weight: 400; }
+.display-m { font-family: var(--font-display); font-size: 28px; line-height: 34px; font-weight: 400; }
+.wordmark { font-family: var(--font-display); font-size: 24px; line-height: 28px; font-weight: 400; }
+.body { font-family: var(--font-text); font-size: 17px; line-height: 28px; font-weight: 400; font-variation-settings: 'opsz' 17; }
+.body-s { font-family: var(--font-text); font-size: 15px; line-height: 24px; font-weight: 400; font-variation-settings: 'opsz' 15; }
+.label { font-family: var(--font-text); font-size: 15px; line-height: 20px; font-weight: 600; font-variation-settings: 'opsz' 15; }
+.caption { font-family: var(--font-text); font-size: 13px; line-height: 20px; font-weight: 400; font-variation-settings: 'opsz' 12; }
+.price { font-family: var(--font-text); font-size: 17px; line-height: 28px; font-weight: 600; font-variation-settings: 'opsz' 17; }
+
+/* ---------- component classes ---------- */
+/* Base */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: 17px;
+  line-height: 28px;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; margin: 0; }
+a { color: var(--gilt-deep); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--gilt-deep); outline-offset: 2px; }
+.vintage { font-style: italic; font-variant-numeric: oldstyle-nums; color: var(--ink-secondary); }
+.amount { font-weight: 600; font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Dot leader: the signature. Name ........ value */
+.leader-line { display: flex; align-items: baseline; gap: var(--space-2); }
+.leader-line > .leader {
+  flex: 1 1 auto;
+  min-width: var(--space-6);
+  border-bottom: 2px dotted var(--leader);
+  transform: translateY(-6px);
+}
+
+/* Site header */
+.site-header { border-bottom: 1px solid var(--rule); background: var(--paper); }
+.site-header__inner {
+  max-width: var(--page-max); margin: 0 auto; padding: var(--space-4) var(--space-6);
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); flex-wrap: wrap;
+}
+.site-header__brand { font-family: var(--font-display); font-size: 24px; line-height: 28px; color: var(--ink); text-decoration: none; }
+.site-nav { display: flex; align-items: center; gap: var(--space-6); font-size: 15px; line-height: 24px; flex-wrap: wrap; }
+.site-nav a { color: var(--ink); text-decoration: none; padding: var(--space-1) 0; border-bottom: 2px solid transparent; }
+.site-nav a:hover { border-bottom-color: var(--rule); }
+.site-nav a[aria-current="page"] { border-bottom-color: var(--gilt); }
+.cart-count {
+  display: inline-block; min-width: 22px; padding: 0 6px; margin-left: var(--space-1);
+  border-radius: var(--radius-pill); background: var(--ink); color: var(--on-ink);
+  font-size: 13px; line-height: 20px; text-align: center; font-variant-numeric: lining-nums;
+}
+
+/* Page */
+.page { max-width: var(--measure); margin: 0 auto; padding: var(--space-16) var(--space-6) var(--space-16); }
+.page--wide { max-width: var(--page-max); }
+.page-title { font-size: 48px; line-height: 52px; letter-spacing: -0.01em; margin-bottom: var(--space-12); }
+
+/* Wine list: winery sections with wine rows */
+.winery-section + .winery-section { margin-top: var(--space-8); padding-top: var(--space-8); border-top: 1px solid var(--rule); }
+.winery-section__head { display: flex; align-items: baseline; gap: var(--space-3); flex-wrap: wrap; margin-bottom: var(--space-3); }
+.winery-section__name { font-size: 28px; line-height: 34px; }
+.winery-section__name a { color: inherit; text-decoration: none; }
+.winery-section__name a:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+.winery-section__region { font-size: 15px; line-height: 24px; color: var(--ink-secondary); }
+.wine-rows { list-style: none; margin: 0; padding: 0; }
+.wine-row { padding: var(--space-1) 0; }
+.wine-row__name { color: var(--ink); text-decoration: none; }
+.wine-row__name:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+.wine-row__meta { display: block; font-size: 15px; line-height: 24px; color: var(--ink-secondary); }
+.wine-row__admin { display: flex; gap: var(--space-4); font-size: 15px; line-height: 24px; }
+.fav-mark { color: var(--gilt); }
+
+/* Wine detail */
+.wine-detail { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: var(--space-12); align-items: start; }
+.wine-detail__winery { font-size: 15px; line-height: 24px; margin-bottom: var(--space-2); }
+.wine-detail__name { font-size: 36px; line-height: 42px; margin-bottom: var(--space-4); }
+.wine-detail__text { max-width: var(--measure); margin: 0 0 var(--space-6); }
+.spec-panel { background: var(--paper-raised); border: 1px solid var(--rule); border-radius: var(--radius-md); padding: var(--space-6); }
+.spec-list { margin: 0 0 var(--space-6); }
+.spec-list > div { padding: 2px 0; }
+.spec-list dt { color: var(--ink-secondary); }
+.spec-list dd { margin: 0; }
+.spec-panel__price { font-size: 28px; line-height: 34px; font-family: var(--font-display); margin-bottom: var(--space-4); font-variant-numeric: lining-nums; }
+.action-row { display: flex; gap: var(--space-2); flex-wrap: wrap; align-items: center; }
+@media (max-width: 720px) { .wine-detail { grid-template-columns: 1fr; gap: var(--space-8); } }
+
+/* Winery profile */
+.winery-profile { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: var(--space-6); align-items: start; }
+.winery-profile__logo {
+  width: 96px; height: 96px; object-fit: contain; background: var(--paper-raised);
+  border: 1px solid var(--rule); border-radius: var(--radius-md);
+}
+.winery-profile__logo--empty { display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 40px; color: var(--ink-secondary); }
+.winery-profile__name { font-size: 36px; line-height: 42px; margin-bottom: var(--space-1); }
+.winery-profile__facts { font-size: 15px; line-height: 24px; color: var(--ink-secondary); margin: 0 0 var(--space-4); }
+.winery-profile__text { margin: 0; max-width: var(--measure); }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  height: var(--control-height); padding: 0 var(--space-4);
+  font-family: var(--font-text); font-size: 15px; line-height: 20px; font-weight: 600;
+  color: var(--ink); background: transparent; border: 1px solid var(--ink); border-radius: var(--radius-md);
+  cursor: pointer; text-decoration: none; white-space: nowrap;
+}
+.btn:hover { background: var(--paper-raised); }
+.btn:active { transform: translateY(1px); }
+.btn--primary { background: var(--ink); color: var(--on-ink); }
+.btn--primary:hover { background: #2c4238; }
+.btn--danger { color: var(--garnet); border-color: var(--garnet); }
+.btn--danger:hover { background: var(--garnet); color: var(--paper-raised); }
+.btn--text { border-color: transparent; padding: 0 var(--space-2); color: var(--gilt-deep); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.btn--text:hover { background: transparent; text-decoration-thickness: 2px; }
+.btn--block { width: 100%; }
+.btn[aria-pressed="true"] .fav-glyph { color: var(--gilt); }
+
+/* Fields */
+.form { display: grid; gap: var(--space-4); max-width: var(--measure); }
+.form__row { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: var(--space-4); align-items: start; }
+.field { display: grid; gap: var(--space-1); align-content: start; }
+.field__label { font-size: 15px; line-height: 20px; font-weight: 600; }
+.field__control {
+  width: 100%; min-height: var(--control-height); padding: 0 var(--space-3);
+  font: inherit; font-size: 17px; color: var(--ink);
+  background: var(--paper-raised); border: 1px solid var(--field-border); border-radius: var(--radius-sm);
+}
+textarea.field__control { padding: var(--space-2) var(--space-3); min-height: 7rem; resize: vertical; line-height: 28px; }
+.field__control::placeholder { color: var(--ink-secondary); opacity: 1; }
+.field__control:focus-visible { outline: 2px solid var(--gilt-deep); outline-offset: 0; border-color: var(--gilt-deep); }
+.field__help { font-size: 13px; line-height: 20px; color: var(--ink-secondary); }
+.field__error { font-size: 13px; line-height: 20px; color: var(--garnet); }
+.field--invalid .field__control { border-color: var(--garnet); }
+
+/* Cart */
+.cart { background: var(--paper-raised); border: 1px solid var(--rule); border-radius: var(--radius-md); padding: var(--space-6); }
+.cart__lines { list-style: none; margin: 0 0 var(--space-4); padding: 0; }
+.cart__line { padding: var(--space-2) 0; }
+.cart__line + .cart__line { border-top: 1px solid var(--rule); }
+.cart__controls { display: flex; align-items: center; gap: var(--space-2); font-size: 15px; line-height: 24px; color: var(--ink-secondary); margin-top: var(--space-1); }
+.qty-btn {
+  width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center;
+  font: inherit; font-size: 17px; color: var(--ink); background: transparent;
+  border: 1px solid var(--field-border); border-radius: var(--radius-sm); cursor: pointer;
+}
+.cart__total { font-family: var(--font-display); font-size: 24px; line-height: 30px; padding-top: var(--space-4); border-top: 2px solid var(--ink); margin-bottom: var(--space-6); }
+
+/* Notices and empty states */
+.notice { border: 1px solid var(--rule); background: var(--paper-raised); border-radius: var(--radius-md); padding: var(--space-3) var(--space-4); font-size: 15px; line-height: 24px; }
+.notice--error { background: var(--garnet-soft); border-color: var(--garnet); color: var(--garnet); }
+.notice__title { font-weight: 600; display: block; }
+.empty-state { text-align: left; padding: var(--space-12) 0; max-width: 28rem; }
+.empty-state__title { font-size: 28px; line-height: 34px; margin-bottom: var(--space-2); }
+.empty-state p { margin: 0 0 var(--space-4); color: var(--ink-secondary); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } .btn:active { transform: none; } }
+
+/* Log out sits in the nav but is a button, so it gets the same look as the nav links */
+.site-nav__button { font: inherit; color: var(--ink); background: none; border: 0; border-bottom: 2px solid transparent; padding: var(--space-1) 0; cursor: pointer; }
+.site-nav__button:hover { border-bottom-color: var(--rule); }
+.site-nav__user { color: var(--ink-secondary); }
+
+/* Wineries page: the winery profile parts, used smaller, one under another */
+.winery-list { list-style: none; margin: 0; padding: 0; }
+.winery-card { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: var(--space-4); align-items: center; padding: var(--space-4) 0; }
+.winery-card + .winery-card { border-top: 1px solid var(--rule); }
+.winery-card .winery-profile__facts { margin: 0; }
+.winery-profile__logo--small { width: 64px; height: 64px; font-size: 28px; }
+
+/* Winery page: the winery's wines under its profile */
+.winery-wines { max-width: var(--measure); margin-top: var(--space-12); padding-top: var(--space-8); border-top: 1px solid var(--rule); }
+.winery-wines .winery-section__name { margin-bottom: var(--space-3); }
+@media (max-width: 720px) { .winery-profile { grid-template-columns: 1fr; } }
+
+/* A notice at the top of a page (e.g. "Wine saved.") */
+.page-notice { max-width: var(--measure); margin-bottom: var(--space-6); }
+
+/* A button that looks like a text link (Delete under a wine row) */
+.link-button { font: inherit; padding: 0; background: none; border: 0; cursor: pointer; color: var(--gilt-deep); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.link-button:hover { text-decoration-thickness: 2px; }
+.link-button--danger { color: var(--garnet); }
+
+/* Admin buttons under a winery's description and under a wine's specs */
+.winery-profile__actions { margin-top: var(--space-6); }
+.btn:disabled { opacity: 0.6; cursor: default; }
+
+/* Users page (admin): one row per account */
+.user-list { list-style: none; margin: 0; padding: 0; }
+.user-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; padding: var(--space-3) 0; }
+.user-row + .user-row { border-top: 1px solid var(--rule); }
+.user-row__name { display: block; font-weight: 600; }
+.user-row__email { font-size: 15px; line-height: 24px; color: var(--ink-secondary); }
+.user-row__actions { display: flex; align-items: center; gap: var(--space-2); }
+.user-row__role { width: auto; font-size: 15px; }
+
+/* Cart and favourites */
+.cart__total-amount { font-weight: 400; }
+.spec-panel__notice { margin: var(--space-3) 0 0; font-size: 15px; line-height: 24px; color: var(--ink-secondary); }
+.spec-panel__admin { margin-top: var(--space-6); padding-top: var(--space-4); border-top: 1px solid var(--rule); }
